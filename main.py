@@ -27,11 +27,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="MIMIC-CXR RAG API", version="1.0.0", lifespan=lifespan)
 
+# Allow all origins for public API access on Hugging Face Spaces
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=CORS_ORIGINS,
-    allow_origin_regex=r"https://.*\.github\.io",
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

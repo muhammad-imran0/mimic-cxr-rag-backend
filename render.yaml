@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mimic-cxr-rag-backend
+    runtime: docker
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: QDRANT_COLLECTION
+        value: mimic_cxr_vectors
+      - key: CORS_ORIGINS
+        value: https://muhammad-imran0.github.io,http://localhost:5173
+      - key: LOG_LEVEL
+        value: INFO
+      - key: HF_HOME
+        value: /app/.cache/huggingface

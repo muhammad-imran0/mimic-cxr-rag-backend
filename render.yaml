@@ -2,7 +2,7 @@ services:
   - type: web
     name: mimic-cxr-rag-backend
     runtime: docker
-    plan: starter
+    plan: standard
     healthCheckPath: /health
     envVars:
       - key: QDRANT_URL

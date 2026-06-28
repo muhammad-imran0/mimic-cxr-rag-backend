@@ -17,7 +17,7 @@ git push origin main
 2. Connect repo: `muhammad-imran0/mimic-cxr-rag-backend`
 3. Settings:
    - **Runtime:** Docker
-   - **Plan:** Starter (512MB may be tight; use Standard 2GB if model fails to load)
+   - **Plan:** **Standard (2 GB RAM)** — required for BiomedCLIP (512 MB free tier will OOM)
    - **Health check path:** `/health`
 
 ## 3. Set environment variables on Render
@@ -59,4 +59,4 @@ VITE_API_URL=https://YOUR-URL.onrender.com npm run deploy
 - **Qdrant Cloud** must already have vectors indexed (from pipeline repo).
 - **Matched X-ray images** (`/cases/{id}/image`) need parquet data on the server. On Render, retrieval + reports work; images may not load unless you add persistent storage with the MIMIC parquet files.
 - **Cold starts:** free/starter tier sleeps after inactivity; first request may take 30–60s.
-- **RAM:** BiomedCLIP needs ~1–2 GB. If deploy crashes, upgrade Render plan to Standard (2 GB).
+- **RAM:** BiomedCLIP needs ~1–2 GB. Use **Standard (2 GB)** on Render. Free/Starter (512 MB) will fail with "Out of memory".

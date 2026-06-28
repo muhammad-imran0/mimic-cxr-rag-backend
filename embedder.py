@@ -15,7 +15,7 @@ def get_embedder():
     global _model, _preprocess, _tokenizer, _device
 
     if _model is None:
-        _device = "cuda" if torch.cuda.is_available() else "cpu"
+        _device = "cpu"  # Render has no GPU; CPU-only torch in Docker
         _model, _, _preprocess = open_clip.create_model_and_transforms(MODEL_ID)
         _tokenizer = open_clip.get_tokenizer(MODEL_ID)
         _model.to(_device).eval()

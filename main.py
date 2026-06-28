@@ -8,7 +8,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from config import CORS_ORIGINS, LOG_LEVEL
-from embedder import get_embedder
 from qdrant import close_qdrant_client
 from routes import router
 
@@ -20,9 +19,7 @@ logger = logging.getLogger("mimic-cxr-rag")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting MIMIC-CXR RAG backend...")
-    loop = asyncio.get_event_loop()
-    loop.run_in_executor(None, get_embedder)
+    logger.info("Starting MIMIC-CXR RAG backend (model loads on first request)...")
     yield
     close_qdrant_client()
     logger.info("Shutdown complete.")
